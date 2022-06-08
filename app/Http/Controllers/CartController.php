@@ -5,13 +5,14 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Models\Product;
+use Darryldecode\Cart\Cart;
 
 class CartController extends Controller
 {
     public function shop()
     {
         $products = Product::all();
-        dd($products);
+        //dd($products); //Para ver el contenido de la variable
         return view('shop')->withTitle('Carmencita Ceramic | SHOP')->with(['products' => $products]);
     }
 
@@ -23,6 +24,7 @@ class CartController extends Controller
     }
     public function remove(Request $request)
     {
+        //Cart::remove($request->id);
         \Cart::remove($request->id);
         return redirect()->route('cart.index')->with('success_msg', 'Item is removed!');
     }
